@@ -1,12 +1,17 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import styled from 'styled-components/macro';
 import CartTitle from './CartTitle';
 import CartList from './CartList';
+import { useCart } from '../../content/cartContext';
 
-export function Cart({ title, products, total, onUpdate }) {
+export function Cart() {
+  const {carts: {title}} = useCart();
+  console.log(title);
   return (
     <Container>
       <CartTitle>{title}</CartTitle>
-      <CartList products={products} total={total} onUpdate={onUpdate} />
+      <CartList/>
     </Container>
   );
 }

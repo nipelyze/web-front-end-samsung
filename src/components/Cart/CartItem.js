@@ -1,13 +1,15 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { any, exact, func, number, string } from 'prop-types';
 import styled from 'styled-components/macro';
 import { Counter } from 'components';
 import { currencyKR } from 'utils';
+import { useCart } from '../../content/cartContext';
 
 export default function CartItem({
   product: { id, photo, name, price, amount, maxAmount },
-  onUpdate,
   ...restProps
 }) {
+  const {handleUpdateAmount} = useCart();
   return (
     <Container {...restProps}>
       <Photo src={photo} alt="" />
@@ -22,7 +24,7 @@ export default function CartItem({
           current={amount}
           max={maxAmount > 0 ? maxAmount : 50}
           style={{ transform: 'scale(0.75)' }}
-          onUpdate={(count) => onUpdate(id, count)}
+          onUpdate={(count) => handleUpdateAmount(id, count)}
         />
       </Amount>
     </Container>
